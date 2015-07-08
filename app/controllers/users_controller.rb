@@ -7,8 +7,11 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
-      redirect_to root_path, notice: "Thank you for signing up."
+      UserMailer.registration_confirmation(@user).deliver
+      flash[:notice] = "Please confirm your email address to continue."
+      redirect_to root_path
     else
+      flash[:error] = "Something went wrong. Please try again."
       render "new"
     end
   end

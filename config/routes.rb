@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
 
-  get 'welcome/about'
-
+  resources :sessions 
   resources :users do
     #/users/:id/confirm
     member do 
-      get :confirm
+      get :confirm_email
     end 
   end
+
+  get 'welcome/index'
+  get 'welcome/about'
+  # get 'about' => 'welcome#about'
+  # get 'index' => 'welcome#index'
 
   root to: 'welcome#index'
 end
