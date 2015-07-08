@@ -1,13 +1,11 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  attr_accessible :email, :password, :password_confirmation, :name 
-
-  before_create :generate_confirmation_token 
+  before_create :confirmation_token 
 
   private
 
-  def generate_confirmaton_token
-    self.confirmation_token = SecureRandom.urlsafe_base64
+  def confirmation_token
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s
   end
 end
