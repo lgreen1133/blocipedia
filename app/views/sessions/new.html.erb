@@ -2,14 +2,14 @@
 
 <div class="pull-left">
   <div class="col-md-12">
-    <%= form_for sessions_path do |f| %>
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control', placeholder: "Enter email" %>
+    <%= form_tag sessions_path do %>
+    <div class="field">
+      <%= label_tag :email %><br/>
+      <%= text_field_tag :email, params[:email] %>
     </div>
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control', placeholder: "Enter password" %>
+    <div class="field">
+      <%= label_tag :password %><br/>
+      <%= password_field_tag :password %>
     </div>
-     <%= f.submit "Sign in", class: 'btn btn-success' %>
+    <div class="actions"><%= submit_tag "Sign In" %>
 <% end %>
