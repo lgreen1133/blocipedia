@@ -30,6 +30,15 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    if current_user.update_attributes(user_params)
+      flash[:notice] = "User information updated successfully."
+    else
+      flash[:notice] = "Invalid user information"
+    end
+    redirect_to edit_user_path
+  end
+
   private
 
   def user_params
