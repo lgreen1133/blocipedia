@@ -31,6 +31,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    puts "*"*80
+    puts session[:user_id]
+    puts "*"*80
+
     if current_user.update_attributes(user_params)
       flash[:notice] = "User information updated successfully."
     else
