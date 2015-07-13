@@ -52,3 +52,5 @@ gem 'pry-rails', :group => :development
 gem 'bootstrap-sass'
 
 gem 'figaro', '1.0'
+
+gem 'pundit'
