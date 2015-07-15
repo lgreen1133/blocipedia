@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
+  attr_accessor :skip_confirmation 
   has_secure_password
   has_many :wikis
 
-  before_create :confirmation_token
+  before_create :confirmation_token, unless: :skip_confirmation
+  after_create :deliver_welcome_email, unless: :skip_confirmation
   after_initialize :default_role 
 
   def admin?
@@ -17,6 +19,10 @@ class User < ActiveRecord::Base
     role == 'premium'
   end
 
+  def skip_confirmation!
+    self.skip_confirmation = true
+  end
+
   private
 
   def confirmation_token
@@ -24,6 +30,10 @@ class User < ActiveRecord::Base
   end
 
   def default_role
-    self.role = 'standard'
+    self.role = 'standard' if self.role.blank?
   end 
+
+  def deliver_welcome_email
+    UserMailer.registration_confirmation(self).deliver_now
+  end
 end
