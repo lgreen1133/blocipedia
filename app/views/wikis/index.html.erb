@@ -13,12 +13,13 @@
       </div>
     </div>
     <% end %>
+    <%= will_paginate @wikis %>
 
     <div class="pull-right">
-    <div class="col-md-4">
-      <% if policy(Wiki.new).create? %>
-        <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
-      <% end %>
+      <div class="col-md-4">
+        <% if policy(Wiki.new).create? %>
+          <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
     </div>
-  </div>
 </div>
