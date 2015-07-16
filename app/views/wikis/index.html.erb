@@ -1,21 +1,24 @@
-<h1>All Wikis</h1>
-
-<div class="row">
-  <div class="col-md-8">
-    <% @wikis.each do |wiki| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to wiki.title, wiki %>
-          </h4>
+<div class="container">
+  <h1>All Wikis</h1>
+  <div class="row">
+    <div class="col-md-10">
+      <% @wikis.each do |wiki| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to wiki.title, wiki %>
+            </h4>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <% end %>
-
-  <div class="col-md-4">
-    <% if policy(Wiki.new).create? %>
-      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
     <% end %>
+
+    <div class="pull-right">
+    <div class="col-md-4">
+      <% if policy(Wiki.new).create? %>
+        <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
+</div>
