@@ -1,0 +1,13 @@
+ <div class="container">
+  <% unless current_user.premium? %>
+   <%= form_tag charges_path do %>
+     <h2>Click the button to upgrade your account to Premium.</h2>
+     <h4>With a premium account, you can create your very own private Wiki Pages. This will give you the advantage of sharing internal documents with your team. Keep your Training Wikis private.</h4>
+     <br>
+     <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
+   <% end %>
+   <% else %>
+   <h3>Click here to downgrade your account</h3>
+   <%= link_to "Yes, please downgrade my account", downgrade_path, class: 'btn btn-warning' %>
+  <% end %>
+</div> 
