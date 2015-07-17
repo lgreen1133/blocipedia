@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :wikis
+  resources :charges, only: [:new, :create]
   resources :sessions 
   resources :users do
     #/users/:id/confirm
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   get 'about' => 'welcome#about'
+  get 'downgrade' => 'users#downgrade'
 
   root to: 'welcome#index'
 end
