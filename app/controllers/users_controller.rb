@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  def show
+    @user = current_user
+  end
 
   def new
     @user = User.new
@@ -40,6 +43,11 @@ class UsersController < ApplicationController
       flash[:notice] = "Invalid user information"
     end
     redirect_to edit_user_path
+  end
+
+  def downgrade
+    current_user.update_attribute(:role, 'standard')
+    redirect_to root_path
   end
 
   private
