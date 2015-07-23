@@ -51,12 +51,15 @@ class UsersController < ApplicationController
     else
       flash[:error] = "There was an error. Please try again."
     end
+    current_user.wikis.each do |wiki|
+      wiki.update_attribute(:public, true)
+    end
     redirect_to root_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
   end
 end

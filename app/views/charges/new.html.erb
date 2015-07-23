@@ -7,7 +7,7 @@
      <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
    <% end %>
    <% else %>
-   <h3>Click here to downgrade your account</h3>
+   <h3>Click here to downgrade your account. Please be reminded that your Private Wikis will become Public.</h3>
    <%= link_to "Yes, please downgrade my account", downgrade_path, class: 'btn btn-warning' %>
   <% end %>
 </div> 
