@@ -46,13 +46,20 @@ class UsersController < ApplicationController
   end
 
   def downgrade
-    current_user.update_attribute(:role, 'standard')
+    if current_user.update_attribute(:role, 'standard')
+      flash[:notice] = "Your account has been downgraded."
+    else
+      flash[:error] = "There was an error. Please try again."
+    end
+    current_user.wikis.each do |wiki|
+      wiki.update_attribute(:public, true)
+    end
     redirect_to root_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
   end
 end

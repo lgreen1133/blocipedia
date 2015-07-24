@@ -1,28 +1,20 @@
-<h1>Create a New Wiki</h1>
+<div class="container">
+  <h1>Create a New Wiki</h1>
 
-<div class="row">
- <div class="col-md-4">
-   <p>Guidelines to follow when creating new Wikis:</p>
-   <ul>
-    <li>Always cite your sources.</li>
-    <li>No need to warn readers of spoilers.</li>
-    <li>Non-free content must comply with U.S. copyright law.</li>
-    <li>Plagiarism will get you banned. No exceptions.</li>
-   </ul>
- </div>
- <div class="col-md-8">
-   <%= form_for @wiki do |f| %>
-     <div class="form-group">
-       <%= f.label :title %>
-       <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
-     </div>
-     <div class="form-group">
-       <%= f.label :body %>
-       <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
-     </div>
-     <div class="form-group">
-       <%= f.submit "Save", class: 'btn btn-primary' %>
-     </div>
-   <% end %>
- </div>
+  <div class="row">
+   <div class="col-md-4">
+     <p>Guidelines to follow when creating new Wikis:</p>
+     <ul>
+      <li>Always cite your sources.</li>
+      <li>No need to warn readers of spoilers.</li>
+      <li>Non-free content must comply with U.S. copyright law.</li>
+      <li>Plagiarism will get you banned. No exceptions.</li>
+     </ul>
+   </div>
+   <div class="col-md-8">
+
+    <%= render partial: 'form', locals: { wiki: @wiki } %>
+
+   </div>
+  </div>
 </div>
