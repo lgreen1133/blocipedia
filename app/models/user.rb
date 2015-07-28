@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :wikis
 
+  has_many :collaborators
+  has_many :collab_wikis, source: :wiki, through: :collaborators
+
   before_create :confirmation_token, unless: :skip_confirmation
   after_create :deliver_welcome_email, unless: :skip_confirmation
   after_initialize :default_role 
