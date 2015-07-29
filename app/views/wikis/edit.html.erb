@@ -13,4 +13,21 @@
  <div class="col-md-8">
     <%= render partial: 'form', locals: { wiki: @wiki } %>
  </div>
+ <% if current_user.role == 'premium' %> 
+ <h3>Manage Collaborators</h3>
+ <table class="table table-striped">
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td>
+      <% if @wiki.users.include? user %>
+      <%= link_to "Remove Collaborator", wiki_collaborator_path(@wiki, @collab_wikis(user)), method: :delete, class: 'btn btn-danger' %> 
+      <% else %> 
+      <%= link_to "Add Collaborator", wiki_collaborator_path(@wiki, user_id: user.id), method: :post, class: 'btn btn-success' %> 
+      <% end %> 
+    </td>
+  </tr>
+  <% end %>
+ </table>
+ <% end %>
 </div>

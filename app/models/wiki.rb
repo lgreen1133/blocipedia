@@ -3,5 +3,5 @@ class Wiki < ActiveRecord::Base
   has_many :collaborators
   has_many :users, through: :collaborators
 
-  # scope :visible_to, -> (user) { user && ((user.role == 'premium') || (user.role == 'admin')) ? all : where(public: true)  }
+  # scope :visible_to, -> (user) { user && (user.role.premium? || user.role.admin?) ? all : where(public: true)  }
 end

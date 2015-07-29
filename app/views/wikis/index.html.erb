@@ -2,7 +2,7 @@
   <h1>All Wikis</h1>
   <div class="row">
     <div class="col-md-10">
-      <% @wikis.each do |wiki| %>
+      <% policy_scope(@wikis).each do |wiki| %>
         <div class="media">
           <div class="media-body">
             <h4 class="media-heading">
@@ -13,8 +13,8 @@
       </div>
     </div>
     <% end %>
-    <%= will_paginate @wikis %>
-
+<!--     <%= will_paginate @wikis %> -->
+        <%= @wikis %>
     <div class="pull-right">
       <div class="col-md-4">
         <% if policy(Wiki.new).create? %>

@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   resources :wikis
+    resources :collaborators, only: [:create, :destroy]
   resources :charges, only: [:new, :create]
   resources :sessions 
   resources :users do
-    #/users/:id/confirm
     member do 
       get :confirm_email
     end 
