@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = policy_scope(Wiki).paginate(page: params[:page], per_page: 5)
+    @wikis = policy_scope(Wiki).paginate(page: params[:page], per_page: 10)
     authorize @wikis 
   end
 
@@ -16,10 +16,10 @@ class WikisController < ApplicationController
 
   def create
     @wiki = current_user.wikis.build(wiki_params)
-    if current_user.role == 'premium' || current_user.role == 'admin'
-     @wiki.public = false
-    else
+    if current_user.standard? 
      @wiki.public = true
+    else
+     @wiki.public = false
     end 
     authorize @wiki
 
