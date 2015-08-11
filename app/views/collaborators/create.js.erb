@@ -1,5 +1,6 @@
-<% if @collaborator.valid? %>
-  $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/collaborator', locals: { wiki: @wiki, collaborator: @new_collaborator }) %>").reset();
+ <% if @collaborator.valid? %>
+  $('#user-' +<%= @collaborator.user_id %>).hide();
+  $('.js-collaborators').html("<%= escape_javascript(render partial: 'collaborators/collaborator') %>").reset();
 <% else %>
-  $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/users', locals: { wiki: @wiki, collaborator: @collaborator }) %>").reset();
+  $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/users') %>").reset();
 <% end %>

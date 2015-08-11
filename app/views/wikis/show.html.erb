@@ -18,11 +18,11 @@
         <h4>Wiki owner: <%= @wiki.user.name %></h4>
         <h5>Collaborators:</h5> 
         <div class='js-collaborators'>
-          <%= render partial: 'collaborators/collaborator', collection: @collaborators %>
+          <%= render partial: 'collaborators/collaborator', locals: { wiki: @wiki } %>
         </div>
           <% if @wiki.user_id == current_user.id || current_user.admin? %> 
             <div class='new-collaborator'>
-            <%= render 'collaborators/users' %>
+            <%= render partial: 'collaborators/users', locals: { wiki: @wiki } %>
             </div>
           </div>
           <% end %>

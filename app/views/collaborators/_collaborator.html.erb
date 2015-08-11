@@ -4,7 +4,7 @@
       <% user = User.find(collaborator.user_id) %>
       <td><%= user.name %></td>
       <td>
-      <% if wiki.user_id == current_user.id || current_user.admin? %>
+      <% if @wiki.user_id == current_user.id || current_user.admin? %>
       <td>
       <%= link_to "Remove Collaborator", [@wiki, collaborator], method: :delete, class: 'btn btn-xs btn-danger', remote: true  %>
       </td>
