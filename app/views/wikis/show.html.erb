@@ -14,7 +14,7 @@
         <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
       <% end %>
 
-      <% if @wiki.public = false %>
+      <% if @wiki.public == false %>
         <h4>Wiki owner: <%= @wiki.user.name %></h4>
         <h5>Collaborators:</h5> 
         <div class='js-collaborators'>

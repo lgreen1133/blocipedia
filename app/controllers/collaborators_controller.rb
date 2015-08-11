@@ -1,26 +1,24 @@
 class CollaboratorsController < ApplicationController
   # before_action :get_wiki
 
-  # def new
-  #   @collaborator = Collaborator.new
-  # end
+  def new
+    @wiki = Wiki.find(params[:id])
+    @collaborator = Collaborator.new
+    authorize @collaborator
+  end
 
   def create
     @wiki = Wiki.find(params[:wiki_id])
-    @collaborators = @wiki.collaborators
-
-    @collaborator = current_user.collaborators.build(collaborator_params)
-    @collaborator.wiki = @wiki 
+    @collaborator = @wiki.collaborators.build(collaborator_params)
+    @collaborators = User.all 
     @new_collaborator = Collaborator.new
 
-    authorize @collaborator 
+    # authorize @collaborator 
 
     if @collaborator.save 
       flash[:notice] = "Collaborator has been added successfully."
-      # redirect_to edit_wiki_path(@wiki)
     else
       flash[:error] = "There was an error. Please try again."
-      # render :new 
     end
 
     respond_to do |format| 
@@ -33,14 +31,13 @@ class CollaboratorsController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @collaborator = @wiki.collaborators.find(params[:id])
 
-    authorize @collaborator
+    # authorize @collaborator
     
     if @collaborator.destroy
       flash[:notice] = "Collaborator was removed successfully."
     else
       flash[:error] = "There was an error. Please try again."
     end
-    # redirect_to edit_wiki_path(@wiki)
 
     respond_to do |format|
       format.html
@@ -55,6 +52,6 @@ class CollaboratorsController < ApplicationController
   # end
 
   def collaborator_params
-    params.require(:collaborator).permit(:user_id)
+    params.require(:collaborator).permit(:wiki_id, :user_id)
   end
 end

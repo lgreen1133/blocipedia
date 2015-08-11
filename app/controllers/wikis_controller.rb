@@ -19,7 +19,7 @@ class WikisController < ApplicationController
     if current_user.standard? 
      @wiki.public = true
     else
-     @wiki.public = false
+     @wiki.public = @wiki.public || false 
     end 
     authorize @wiki
 

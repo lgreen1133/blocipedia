@@ -4,7 +4,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    record.public? || user.present? && (record.user == user || user.admin? || record.users.include?(user))
+    record.public? || user.present? && (record.user == user || user.admin? || user.premium? || record.users.include?(user))
   end
 
   def create?

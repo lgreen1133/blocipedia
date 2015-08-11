@@ -1,5 +1,4 @@
 <% if @collaborator.valid? %>
-  $('.js-collaborators').prepend("<%= escape_javascript(render(@collaborators)) %>");
   $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/collaborator', locals: { wiki: @wiki, collaborator: @new_collaborator }) %>").reset();
 <% else %>
   $('.new-collaborator').html("<%= escape_javascript(render partial: 'collaborators/users', locals: { wiki: @wiki, collaborator: @collaborator }) %>").reset();
