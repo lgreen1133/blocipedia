@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     role == 'premium'
   end
 
+  # def collaborator_for(user)
+  #   self.collaborators.include?(user)
+  # end
+
   def skip_confirmation!
     self.skip_confirmation = true
   end
