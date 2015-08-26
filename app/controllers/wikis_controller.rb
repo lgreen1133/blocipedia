@@ -1,11 +1,11 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 10)
-    authorize @wikis
+    @wikis = policy_scope(Wiki).paginate(page: params[:page], per_page: 10)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki 
   end
 
   def new
@@ -15,6 +15,11 @@ class WikisController < ApplicationController
 
   def create
     @wiki = current_user.wikis.build(wiki_params)
+    if current_user.standard? 
+     @wiki.public = true
+    else
+     @wiki.public = @wiki.public || false 
+    end 
     authorize @wiki
 
     if @wiki.save
@@ -28,6 +33,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all 
     authorize @wiki
   end
 

@@ -1,0 +1,14 @@
+<table class="table table-striped">
+  <% @wiki.collaborators.each do |collaborator| %>
+  <tr id="collaborator-<%= collaborator.id %>">
+      <% user = User.find(collaborator.user_id) %>
+      <td><%= user.name %></td>
+      <td>
+      <% if @wiki.user_id == current_user.id || current_user.admin? %>
+      <td>
+      <%= link_to "Remove Collaborator", [@wiki, collaborator], method: :delete, class: 'btn btn-xs btn-danger', remote: true  %>
+      </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table> 

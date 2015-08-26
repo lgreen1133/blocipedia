@@ -10,11 +10,12 @@
             </h4>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
-    <% end %>
+    
     <%= will_paginate @wikis %>
-
+    
     <div class="pull-right">
       <div class="col-md-4">
         <% if policy(Wiki.new).create? %>
