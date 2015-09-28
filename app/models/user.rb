@@ -1,14 +1,16 @@
 class User < ActiveRecord::Base
-  attr_accessor :skip_confirmation 
+  attr_accessor :skip_confirmation
   has_secure_password
   has_many :wikis
 
   has_many :collaborators
   has_many :collab_wikis, source: :wiki, through: :collaborators
 
+  validates_uniqueness_of :email 
+
   before_create :confirmation_token, unless: :skip_confirmation
   after_create :deliver_welcome_email, unless: :skip_confirmation
-  after_initialize :default_role 
+  after_initialize :default_role
 
   def admin?
     role == 'admin'
@@ -38,7 +40,7 @@ class User < ActiveRecord::Base
 
   def default_role
     self.role = 'standard' if self.role.blank?
-  end 
+  end
 
   def deliver_welcome_email
     UserMailer.registration_confirmation(self).deliver_now
