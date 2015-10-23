@@ -1,5 +1,0 @@
-== README
-
-This is a production quality SaaS app that will allow users to create their own wikis. 
-
-Hosted app can be found via [Heroku](http://liz11-blocipedia.herokuapp.com/). 
