@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :collaborators
   has_many :collab_wikis, source: :wiki, through: :collaborators
 
-  validates_uniqueness_of :email 
+  validates :email, uniqueness: true
 
   before_create :confirmation_token, unless: :skip_confirmation
   after_create :deliver_welcome_email, unless: :skip_confirmation
@@ -23,10 +23,6 @@ class User < ActiveRecord::Base
   def premium?
     role == 'premium'
   end
-
-  # def collaborator_for(user)
-  #   self.collaborators.include?(user)
-  # end
 
   def skip_confirmation!
     self.skip_confirmation = true
